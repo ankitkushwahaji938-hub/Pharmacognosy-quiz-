@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pharmacognosy Quiz - 126 Questions</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 32px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            letter-spacing: 0.5px;
+        }
+
+        .header p {
+            font-size: 14px;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        .progress-section {
+            background: #f8f9fa;
+            padding: 20px 30px;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .progress-bar {
+            background: #e9ecef;
+            height: 8px;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 12px;
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, #28a745, #20c997);
+            height: 100%;
+            border-radius: 10px;
+            transition: width 0.3s ease;
+        }
+
+        .progress-text {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .quiz-content {
+            padding: 40px 30px;
+            min-height: 500px;
+        }
+
+        .question-card {
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .question-number {
+            font-size: 12px;
+            color: #2a5298;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .question-text {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1e3c72;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        .options-container {
+            display: grid;
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+
+        .option {
+            display: flex;
+            align-items: flex-start;
+            padding: 16px 18px;
+            background: #f8f9fa;
+            border: 2px solid transparent;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .option:hover {
+            background: #e9ecef;
+            border-color: #2a5298;
+        }
+
+        .option input[type="radio"] {
+            margin-right: 15px;
+            margin-top: 2px;
+            cursor: pointer;
+            width: 20px;
+            height: 20px;
+            accent-color: #2a5298;
+        }
+
+        .option label {
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+        }
+
+        .option.selected {
+            background: #ddeeff;
+            border-color: #2a5298;
+        }
+
+        .option.correct {
+            background: #d4edda;
+            border-color: #28a745;
+        }
+
+        .option.incorrect {
+            background: #f8d7da;
+            border-color: #dc3545;
+        }
+
+        .answer-feedback {
+            padding: 16px 18px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            font-size: 14px;
+            font-weight: 500;
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .answer-feedback.show {
+            display: block;
+        }
+
+        .answer-feedback.correct {
+            background: #d4edda;
+            color: #155724;
+            border-left: 4px solid #28a745;
+        }
+
+        .answer-feedback.incorrect {
+            background: #f8d7da;
+            color: #721c24;
+            border-left: 4px solid #dc3545;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 15px;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+
+        button {
+            padding: 12px 28px;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            flex-grow: 1;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(30, 60, 114, 0.2);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-secondary {
+            background: #e9ecef;
+            color: #333;
+            padding: 12px 24px;
+        }
+
+        .btn-secondary:hover {
+            background: #dee2e6;
+        }
+
+        .results-section {
+            text-align: center;
+            display: none;
+        }
+
+        .results-section.show {
+            display: block;
+            animation: slideIn 0.4s ease-out;
+        }
+
+        .score-display {
+            font-size: 56px;
+            font-weight: 700;
+            color: #2a5298;
+            margin-bottom: 20px;
+        }
+
+        .score-text {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 30px;
+            font-weight: 500;
+        }
+
+        .footer {
+            background: #f8f9fa;
+            padding: 20px 30px;
+            text-align: center;
+            font-size: 13px;
+            color: #999;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .hide {
+            display: none;
+        }
+
+        @media (max-width: 600px) {
+            .header h1 {
+                font-size: 24px;
+            }
+
+            .quiz-content {
+                padding: 25px 20px;
+            }
+
+            .question-text {
+                font-size: 16px;
+            }
+
+            .option {
+                padding: 14px 16px;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Pharmacognosy Quiz</h1>
+            <p>Test Your Knowledge • 126 Multiple Choice Questions</p>
+        </div>
+
+        <div class="progress-section">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <div class="progress-text">
+                <span id="questionCounter">Question 1 of 126</span>
+                <span id="scoreDisplay">Score: 0/0</span>
+            </div>
+        </div>
+
+        <div class="quiz-content">
+            <div class="question-card" id="questionCard">
+                <div class="question-number" id="questionNumber">Question 1</div>
+                <div class="question-text" id="questionText"></div>
+                <div class="options-container" id="optionsContainer"></div>
+                <div class="answer-feedback" id="answerFeedback"></div>
+            </div>
+
+            <div class="results-section" id="resultsSection">
+                <div class="score-display" id="finalScore"></div>
+                <div class="score-text" id="scoreMessage"></div>
+            </div>
+
+            <div class="button-group">
+                <button class="btn-secondary" id="prevBtn" onclick="previousQuestion()">Previous</button>
+                <button class="btn-primary" id="nextBtn" onclick="nextQuestion()">Next Question</button>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>ClassGPT Pharmacognosy Quiz Platform • For Educational Purposes • D.Pharmacy & Class 12 Students</p>
+        </div>
+    </div>
+
+    <script>
+        const quizData = [
+            { q: "_____ is used as adrenergic drug.", options: ["Ephedra", "Physostigma", "Pilocarpus", "Belladonna"], correct: 0 },
+            { q: "_____ is not used as CNS depressant.", options: ["Hyoscyamine", "Belladonna", "Coffee", "Opium"], correct: 2 },
+            { q: "_____ Drug do not used as anticancer:", options: ["Podophyllum", "Curare", "Camptotheca", "Taxus"], correct: 1 },
+            { q: "_____ Drug is not used as antirheumatic:", options: ["Quassia", "Aconite", "Colchicum", "Guggul"], correct: 3 },
+            { q: "_____ Drug is used as emetic:", options: ["Agar", "Isapghul", "Ipecac", "Banana"], correct: 2 },
+            { q: "_____ Drug is used as bronchodilator:", options: ["Tea", "Liquorice", "Ipecacuanha", "Vasaka"], correct: 3 },
+            { q: "_____ Drug is used as antimalarial:", options: ["Ashwagandha", "Tulsi", "Ginseng", "Artemesia"], correct: 3 },
+            { q: "Alkaloids are _____ type of substances.", options: ["Acid", "Neutral", "Chemical", "Basic nitrogenous"], correct: 3 },
+            { q: "Glycosides are condensation products of:", options: ["Sugar + aglycone", "Sugar + Protein", "Protein + aglycone", "Fats + aglycone"], correct: 0 },
+            { q: "Tannins give _____ colour with iron compound:", options: ["Pale yellow", "Blue black", "Light pink", "Orange"], correct: 1 },
+            { q: "Flower bud of drug showing medicinal importance is:", options: ["Saffron", "Clove", "Fig", "Caraway"], correct: 1 },
+            { q: "Balsams contains mainly _____ acids:", options: ["Acetic acid + Benzoic acid", "Cinnamic acid + Hydrochloric acid", "Benzoic acid + Sulphuric acid", "Benzoic acid + Cinnamic acid"], correct: 3 },
+            { q: "The following drugs are ergot alkaloid, except:", options: ["Cabergoline", "Ergometrine", "Bromocriptine", "Methysergide"], correct: 0 },
+            { q: "'Deadly Nightshade' is the synonym of the drug:", options: ["Datura", "Belladonna", "Cinchona", "Coca"], correct: 1 },
+            { q: "Which is not the use of ergot:", options: ["Oxytocin", "Prevent post partum hemorrhage", "Migraine", "Laxative"], correct: 3 },
+            { q: "Nux vomica is not used as:", options: ["CNS stimulant", "Bitter stomachic", "Tonic", "Expectorant"], correct: 3 },
+            { q: "Family of Ipecac is:", options: ["Rubiaceae", "Theaceae", "Solanaceae", "Acanthaceae"], correct: 0 },
+            { q: "Which is not the use of Stramonium:", options: ["Anticholinergic", "Mydriatic", "Antiadrenergic", "Control of Motion sickness"], correct: 2 },
+            { q: "Which is not the chemical constituent naturally obtained from Opium:", options: ["Morphine", "Codeine", "Narcotine", "Heroine"], correct: 3 },
+            { q: "Which is the active chemical constituent obtained from Ipecac:", options: ["Cephaeline", "Hydrastine", "Berberine", "Tropane"], correct: 0 },
+            { q: "'Thorn apple' is the synonym for the drug:", options: ["Belladonna", "Cinchona", "Datura", "Stramonium"], correct: 3 },
+            { q: "Which drug is not belonging to family Apocyanaceae:", options: ["Vinca", "Rauwolfia", "Kurchi", "Gloriosa"], correct: 3 },
+            { q: "Which is not the biological source of Cinchona:", options: ["Cinchona calisaya", "Cinchona officinalis", "Cinchona succirubra", "Cinchona indica"], correct: 3 },
+            { q: "Which ergot alkaloid is water-soluble:", options: ["Ergotamine", "Ergosine", "Ergocristine", "Ergometrine"], correct: 3 },
+            { q: "Ergometrine alkaloid shows:", options: ["Laevo", "Dextro", "Racemic mixture", "Trans"], correct: 0 },
+            { q: "Ergometrine shows configuration:", options: ["Levo", "Dextro", "Racemic Mixture", "Trans"], correct: 1 },
+            { q: "Ergot contains large number of indole alkaloids, which are the derivatives of:", options: ["Lysergic acid", "Benzoic acid", "Cinnamic acid", "Meconic acid"], correct: 0 },
+            { q: "Which forms of the ergot alkaloids are especially important:", options: ["Levo", "Dextro", "Cis", "Trans"], correct: 1 },
+            { q: "Ergot powder gives blue colour with:", options: ["P-dimethylaminobenzaldehyde", "Benzaldehyde", "Cinnamaldehyde", "Formaldehyde"], correct: 0 },
+            { q: "Van-Urk's reagent chemically is:", options: ["P-dimethylaminobenzaldehyde", "Benzoic acid+Cinnamic acid", "P-dimethylbenzoic acid", "Cinnamaldehyde"], correct: 0 },
+            { q: "Ergometrine gives fluorescence in water:", options: ["Yellow", "Green", "Red", "Blue"], correct: 3 },
+            { q: "'Crow fig' is the synonym for the drug:", options: ["Strychnous nux vomica", "Rauwolfia sepentina", "Rauwolfia densiflora", "Rauwolfia vometoria"], correct: 0 },
+            { q: "Stychnous nux vomica belongs to family:", options: ["Scrophulareaceae", "Liliaceae", "Apocyanaceae", "Loganiaceae"], correct: 3 },
+            { q: "One of the following microscopic characters not associated with Nux Vomica is:", options: ["Epidermis consist of lignified trichomes", "Epidermis is followed by layer of collapsible cells", "Endosperm shows presence of plasmodesma", "Calcium oxalate crystal and starch grain are present"], correct: 3 },
+            { q: "Lignified trichomes is characteristic of drug:", options: ["Catharanthus roseus", "Digitalis purpurea", "Cassia angustifolia", "Strychnous nux vomica"], correct: 2 },
+            { q: "When the transverse section of nux vomica is treated with ammonium vanadate and sulphuric acid, the endosperm cells show purple colour, due to presence of:", options: ["Strychnine", "Ca-Coubrine", "Brucine", "B-coubrine"], correct: 0 },
+            { q: "When the transverse section of nux vomica is treated with nitric acid, it shows yellow colour due to presence of:", options: ["Strychnine", "Brucine", "a-Coubrine", "B-coubrine"], correct: 1 },
+            { q: "Biological source of nux vomica is:", options: ["Strycnous nux vomica", "Strychnous potatorum", "Strychnous nux blanda", "Strychnous wallichiana"], correct: 0 },
+            { q: "The important chemical constituents of rauwolfia is:", options: ["Reserpine", "Ajamalicine", "Resercinnamine", "Desperidine"], correct: 0 },
+            { q: "Reserpine, when treated with solution of vanillin in acetic acid shows:", options: ["Red", "Green", "Blue", "Pink"], correct: 0 },
+            { q: "Diacetyl derivative of morphine is:", options: ["Codeine", "Heroin", "Papaverine", "Thebaine"], correct: 1 },
+            { q: "The opium alkaloids are present in plant as salt of:", options: ["Benzoic acid", "Tartaric acid", "Meconic acid", "Acetic acid"], correct: 2 },
+            { q: "Opium when dissolved in water and filtrate is treated with ferric chloride solution, it shows _____ colour:", options: ["Reddish purple", "Green", "Yellow", "Orange"], correct: 0 },
+            { q: "Which compound is showing the most potent analgesic property:", options: ["Heroin", "Morphine", "Codeine", "Papaverine"], correct: 0 },
+            { q: "'Trukish opium' is commonly known as:", options: ["Chemist opium", "Druggist opium", "Chinese opium", "Chemist and druggist"], correct: 1 },
+            { q: "Cephaelis Ipecacuanha belongs to family:", options: ["Rubiaceae", "Liliacaceae", "Apocyanaceae", "Rutaceae"], correct: 0 },
+            { q: "Which is not the characteristic feature of alkaloid:", options: ["Complex molecular structure and nitrogen in the molecule", "Basic in nature", "Biosynthetically derived", "Acidic in nature only"], correct: 3 },
+            { q: "'Jesuit's bark' is synonym of:", options: ["Coca leaves", "Ipecacuanha", "Cinchona", "Calumba"], correct: 2 },
+            { q: "Which alkaloid is not present in cinchona bark:", options: ["Quinidine", "Quinine", "Quinovin", "Cinchonin"], correct: 2 },
+            { q: "Which species of cinchona contains highest percentage alkaloid:", options: ["Cinchona succirubra", "Cinchona officinalis", "Cinchona calisaya", "Cinchona ledgeriana"], correct: 0 },
+            { q: "Which is not the prominent chemical constituent in Ipecac:", options: ["Emetine", "Pyschotrine", "Cephaeline", "Cinchonine"], correct: 3 },
+            { q: "The pharmacological action of Ipecac:", options: ["Stimulant", "Emetic", "Sedative", "Hypnotic"], correct: 1 },
+            { q: "Papaverine, narcotine and narceine is under the chemical class:", options: ["Quinoline", "Benzyl isoquinoline", "Isoquinoline", "Benzophenone"], correct: 2 },
+            { q: "Papaverine shows pharmacological activity:", options: ["Spasmolytic", "Emetic", "Antitussive", "Antipyretic"], correct: 0 },
+            { q: "In UV light Ergot shows fluorescence:", options: ["Yellow", "Blue", "Red", "Violet"], correct: 3 },
+            { q: "Adulterants of Rauwolfia serpentine are distinguished on the basis of:", options: ["Presence of sclerenchyma", "Absence of sclerenchyma", "Presence of parenchyma", "Absence of parenchyma"], correct: 0 },
+            { q: "Glycoside present in stychnous nux vomica:", options: ["Strychnine", "Brucine", "Ajmaline", "Loganine"], correct: 3 },
+            { q: "Major pharmacological action of Ephedrine:", options: ["Kidney failure", "Anti-inflammatory", "Heart failure", "Bronchial asthma"], correct: 3 },
+            { q: "Morphine contains main nucleus:", options: ["Phenanthrene", "Anthracene", "Naphthalene", "Naphthacene"], correct: 0 },
+            { q: "The characteristic not associated with alkaloids:", options: ["They all contain nitrogen", "Most of non-volatile alkaloids are solid", "All the alkaloid contains sulphur", "They are physiologically active"], correct: 2 },
+            { q: "Thalleoquin test contain reagents:", options: ["Bromine water + Few drops of ammonia", "Potassium permanganate + Few drops of ammonia", "Bromine water + Nitric acid", "Bromine water + Sodium hydroxide"], correct: 0 },
+            { q: "Shatavari is under the chemical class of glycoside:", options: ["Sterol", "Saponin", "Cyanogentic", "Isothiocyanate"], correct: 1 },
+            { q: "Which drug is used as diuretic:", options: ["Quillaia", "Senega", "Ginseng", "Gokhru"], correct: 3 },
+            { q: "The family of Gokhru:", options: ["Liliaceae", "Cucurbitaceae", "Zygophyllaceae", "Araliaceae"], correct: 2 },
+            { q: "In kiung's isobarbaloin test, Curacao aloes shows colour:", options: ["Yellow", "Blue", "Wine red", "Green"], correct: 2 },
+            { q: "Alcoholic extract of aloe under UV light gives colour:", options: ["Blue", "Red", "Deep brown", "Pink"], correct: 2 },
+            { q: "The biological source for cape aloes:", options: ["Curacao aloes", "Socotrine aloes", "Aloe ferrox", "Zanziber aloes"], correct: 2 },
+            { q: "_____ is not the synonym of Liquorice:", options: ["Glycyrrhiza", "Liquorice root", "Mulethi", "Yam"], correct: 3 },
+            { q: "Liquorice belongs to family:", options: ["Liliaceae", "Triterpenoid", "Loganaceae", "Leguminosae"], correct: 3 },
+            { q: "Liquorice is used in the treatment of:", options: ["Conjuctivitis", "Peptic ulcer", "Allergy", "Skin disease"], correct: 1 },
+            { q: "Modified Borntroger test is positive for drug:", options: ["Aloe", "Senna", "Digitalis", "Senna pod"], correct: 0 },
+            { q: "Botanical source of Arjuna bark:", options: ["Terminalis tamentosa", "Polygala chinesis", "Poligala erioptera", "Terminalis arjuna"], correct: 3 },
+            { q: "Presence of aleurone grain is the characteristic of the drug:", options: ["Belladonna", "Nux vomica", "Hyoscyamus", "Vinca"], correct: 1 },
+            { q: "Digitalis leaves should be dried at temperature below:", options: ["20 °C", "30 °C", "40° C", "60 °C"], correct: 3 },
+            { q: "Vein-islet no. in Indian Senna is in the range of:", options: ["10.5 to 12.5", "13.5 to 16.5", "16.5 to 18.0", "19.5 to 22.5"], correct: 3 },
+            { q: "Stomatal Index in Indian Senna is in the range of:", options: ["17 to 20", "20 to 23", "23 to 26", "26 to 29"], correct: 0 },
+            { q: "Palisade ratio in Alexandrian Senna is:", options: ["7", "10", "13", "16"], correct: 0 },
+            { q: "Vein-islet no. in Alexandrian Senna is in the range of:", options: ["10 to 15.5", "16 to 20.5", "25 to 29.5", "20 to 24.5"], correct: 2 },
+            { q: "In the patient with deficiency of vitamin A, which oil capsules you will suggest:", options: ["Shark liver oil", "Mustard oil", "Arachis oil", "Linseed oil"], correct: 0 },
+            { q: "Which of the following oil is used as vehicle of oily injectables:", options: ["Arachis oil", "Linseed oil", "Castor oil", "Jojoba oil"], correct: 0 },
+            { q: "_____ Oil is showing laxative property:", options: ["Arachis oil", "Sesame oil", "Castor oil", "Corn oil"], correct: 2 },
+            { q: "Acid value is defined as:", options: ["Number of milligram of potassium hydroxide required to neutralize one gram of fat or oil", "Number of gram of potassium hydroxide required to neutralize one gram of fat or oil", "Number of Kilogram of potassium hydroxide required to neutralize one gram of fat or oil", "Number of ml of potassium hydroxide (5N) required to neutralize one gram of fat or oil"], correct: 0 },
+            { q: "Which oil generally lowers the blood cholesterol level:", options: ["Arachis oil", "Castor oil", "Neem oil", "Corn oil"], correct: 3 },
+            { q: "Resins are classified into following subclasses except:", options: ["Acid", "Ester", "Resin alcohol", "Resin ether"], correct: 3 },
+            { q: "Which is not an example of acid resins:", options: ["Benzoin", "Colophony", "Sandrac", "Myrrh"], correct: 0 },
+            { q: "Myrrh contains important acid:", options: ["Comiphoric acid", "Abietic acid", "Benzoic acid", "Acetic acid"], correct: 0 },
+            { q: "Out of the following, which is an example of oleoresin:", options: ["Copaiba", "Canada balsam", "Capsicum", "Myrrh"], correct: 3 },
+            { q: "Oleo gum resins are mixture of:", options: ["Volatile oil + Gum + Resins", "Fixed oil + Gum + Resin", "Fats + Gum + Resin", "Gum + resins"], correct: 0 },
+            { q: "Homogenous mixture of resins and oil are called as:", options: ["Oleoresins", "Oleogum", "Glycoresin", "Balsma"], correct: 0 },
+            { q: "Resins containing benzoic acid or cinnamic acids are called as:", options: ["Oleoresins", "Glycoresins", "Oleogum", "Balsma"], correct: 3 },
+            { q: "Family of drug Zingiber officinale:", options: ["Solanaceae", "Umbelliferae", "Zingiberaceae", "Convolvulaceae"], correct: 2 },
+            { q: "In congestive cardiac failure, digitalis glycosides are used because it increases:", options: ["The heart rate", "The force of myocardial contraction", "The venous pressure", "The cardiac filling pressure"], correct: 1 },
+            { q: "Senna leaf I.P. consists of:", options: ["Dried leaflets of Cassia acutifolia and Cassia angustifolia", "Dried leaflets of Cassia indica", "Dried leaflets of Cassia carpinifolia", "Dried leaflets of Cassia carpinifolia and Cassia acutifolia"], correct: 0 },
+            { q: "The principal constituents Anethole (50-60%) and Fenchone (18-20%) are present in the volatile oil obtained from:", options: ["Fruits of Ammi visnaga Linn", "Fruits of Foeniculum capillaceum (G. vulgare)", "Fruits of Carum carvi Linn", "Fruits of Anethum graveolens Linn"], correct: 1 },
+            { q: "One of the uses given below for opioids is not correct:", options: ["Antitussive", "Analgesic", "Anti-inflammatory", "Antidiarrhoeal"], correct: 2 },
+            { q: "Fruits which are derived from plants Umbiliferae are all of the type:", options: ["Cremocarp", "Pericarp", "Epicarp", "Mesocarp"], correct: 0 },
+            { q: "Chemical test used for identification of carbohydrates:", options: ["Ninhydrin", "Molisch", "Borntrager", "Baljet"], correct: 1 },
+            { q: "Important chemical constituent of Algin is:", options: ["Tragacanthin", "Bassorin", "Alginic acid", "Alginic ester"], correct: 2 },
+            { q: "Important chemical constituent honey is:", options: ["Glucose", "Fructose", "Maltose", "Invert sugar"], correct: 3 },
+            { q: "Pectin is used in the pharmaceutical industries as:", options: ["Adsorbent", "Demulcent", "Emulsifying agent", "Suspending agent"], correct: 0 },
+            { q: "Liquid glucose is obtained by:", options: ["Partial hydrolysis of glucose", "Partial hydrolysis of starch", "Complete hydrolysis of starch", "Complete hydrolysis of glucose"], correct: 1 },
+            { q: "The biological source for Indian gum is:", options: ["Cyamopsis tetragonoglobules", "Astragalus gamifer", "Acacia Arabica", "Acacia Senegal"], correct: 2 },
+            { q: "When Indian gum is treated with 'ruthenium red' it shows:", options: ["Pink colour", "Red colour", "Blue", "No colour change"], correct: 3 },
+            { q: "When Indian gum is treated with hydrogen peroxide and benzidine in alcohol it shows blue colour due to:", options: ["Hydrolyase enzyme", "Oxidase enzyme", "Reductase enzyme", "Invertase enzyme"], correct: 1 },
+            { q: "The mostly used adulterant for Indian gum is:", options: ["Acacia Senegal gum", "Gum from Astragalus gummifer", "Gum ghatti from Anogeissus latifolia", "Guar gum"], correct: 2 },
+            { q: "Pectin is used in the treatment of:", options: ["Ulcer", "Hypertension", "Angina", "Diarrhoea"], correct: 3 },
+            { q: "Biological source for Isapgol:", options: ["Plantago ovata", "Aegle marmelos", "Giladinium amansii", "Condrus cripsus"], correct: 0 },
+            { q: "Which test is used for the purity of Isapgol:", options: ["Barfoed test", "Millon's test", "Molisch test", "Swelling factor"], correct: 3 },
+            { q: "When Isapgol is treated with ruthenium red, it shows _____ colour:", options: ["Blue", "Yellow", "Pink", "Green"], correct: 2 },
+            { q: "Isapgol seeds are adulterated with:", options: ["Plantago purshii", "Plantago lanciolata", "Plantago aristala", "Plantago pysllium"], correct: 1 },
+            { q: "Agar is used as:", options: ["Binder", "Disintigrant", "Emulsifying agent", "Preservative"], correct: 2 },
+            { q: "Amylum is the synonym for:", options: ["Tragacanth", "Starch", "Inulin", "Locust bean"], correct: 1 },
+            { q: "The synonym of Lactose is:", options: ["Milk sugar", "Butter sugar", "Crystalline sugar", "Pure sugar"], correct: 0 },
+            { q: "Gambir flurescin test is used for drug:", options: ["Arjuna", "Ashoka", "Pale catechu", "Black catechu"], correct: 2 },
+            { q: "Goldbeater skin test is used for identification of:", options: ["Alkaloids", "Glycosides", "Tannins", "Resins"], correct: 2 },
+            { q: "Which drugs are used as antitussive:", options: ["Vasaka", "Tulsi", "Dioscorea", "A & B Both"], correct: 3 },
+            { q: "All drugs are belong to leguminosae family EXCEPT:", options: ["Guar gum", "Acacia", "Glycyrrhiza", "Garlic"], correct: 3 },
+            { q: "All drugs are belonging to family Liliaceae family EXCEPT:", options: ["Linseed oil", "Satavari", "Colchicum", "Withania"], correct: 3 },
+            { q: "Following drugs are used as Carminative EXCEPT:", options: ["Asafoetida", "Nutmeg", "Ajowan", "Catechu"], correct: 3 },
+            { q: "Given the following drug which is used as antidiabetic:", options: ["Shankpushpi", "Picrorrhiza", "Gymnema", "Ergot"], correct: 2 },
+            { q: "Which oil is used as Antileprotic:", options: ["Lemon oil", "Sandal wood oil", "Chaulmoogra oil", "Shark liver oil"], correct: 2 },
+            { q: "Phenanthrene nucleus is present in:", options: ["Morphine", "Codeine", "Papaverine", "Thebaine"], correct: 2 },
+            { q: "All drugs are obtained from seeds EXCEPT:", options: ["Nutmeg", "Asafoetida", "Nux-vomica", "Guargum"], correct: 1 },
+            { q: "All drugs are obtained from leaves EXCEPT:", options: ["Vasaka", "Tulsi", "Gymnema", "Guggal"], correct: 3 },
+            { q: "All drugs are obtained from roots EXCEPT:", options: ["Rauwolfia", "Aconite", "Withania", "Caraway"], correct: 3 },
+            { q: "All drugs are obtained from fruit EXCEPT:", options: ["Dill", "Fennel", "Clove", "Ajowan"], correct: 2 }
+        ];
+
+        let currentQuestion = 0;
+        let answers = {};
+        let score = 0;
+
+        function loadQuestion() {
+            const q = quizData[currentQuestion];
+            document.getElementById('questionNumber').textContent = `Question ${currentQuestion + 1}`;
+            document.getElementById('questionText').textContent = q.q;
+            document.getElementById('questionCounter').textContent = `Question ${currentQuestion + 1} of ${quizData.length}`;
+            document.getElementById('answerFeedback').classList.remove('show');
+
+            const progressPercent = ((currentQuestion + 1) / quizData.length) * 100;
+            document.getElementById('progressFill').style.width = progressPercent + '%';
+
+            const container = document.getElementById('optionsContainer');
+            container.innerHTML = '';
+            q.options.forEach((option, index) => {
+                const div = document.createElement('label');
+                div.className = 'option';
+                div.innerHTML = `<input type="radio" name="option" value="${index}" ${answers[currentQuestion] === index ? 'checked' : ''}>
+                <label>${String.fromCharCode(65 + index)}) ${option}</label>`;
+                
+                const radio = div.querySelector('input');
+                radio.addEventListener('change', () => {
+                    answers[currentQuestion] = index;
+                    updateScore();
+                    showFeedback(index);
+                    div.classList.add('selected');
+                });
+
+                container.appendChild(div);
+            });
+
+            updateButtonStates();
+            updateScore();
+        }
+
+        function showFeedback(selectedIndex) {
+            const q = quizData[currentQuestion];
+            const feedback = document.getElementById('answerFeedback');
+            const isCorrect = selectedIndex === q.correct;
+            
+            feedback.classList.remove('correct', 'incorrect');
+            feedback.classList.add(isCorrect ? 'correct' : 'incorrect');
+            feedback.textContent = isCorrect ? '✓ Correct Answer!' : `✗ Incorrect. The correct answer is ${String.fromCharCode(65 + q.correct)})`;
+            feedback.classList.add('show');
+        }
+
+        function updateScore() {
+            let currentScore = 0;
+            for (let i = 0; i <= currentQuestion; i++) {
+                if (answers[i] === quizData[i].correct) {
+                    currentScore++;
+                }
+            }
+            score = currentScore;
+            document.getElementById('scoreDisplay').textContent = `Score: ${score}/${currentQuestion + 1}`;
+        }
+
+        function nextQuestion() {
+            if (currentQuestion < quizData.length - 1) {
+                currentQuestion++;
+                loadQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function previousQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                loadQuestion();
+            }
+        }
+
+        function updateButtonStates() {
+            document.getElementById('prevBtn').disabled = currentQuestion === 0;
+            if (currentQuestion === quizData.length - 1) {
+                document.getElementById('nextBtn').textContent = 'Submit Quiz';
+            } else {
+                document.getElementById('nextBtn').textContent = 'Next Question';
+            }
+        }
+
+        function showResults() {
+            let totalScore = 0;
+            for (let i = 0; i < quizData.length; i++) {
+                if (answers[i] === quizData[i].correct) {
+                    totalScore++;
+                }
+            }
+
+            const percentage = (totalScore / quizData.length) * 100;
+            let message = '';
+            if (percentage >= 90) {
+                message = 'Outstanding! You have excellent knowledge of Pharmacognosy!';
+            } else if (percentage >= 75) {
+                message = 'Great! You have a strong understanding of Pharmacognosy.';
+            } else if (percentage >= 60) {
+                message = 'Good! You have a decent grasp of the concepts.';
+            } else if (percentage >= 40) {
+                message = 'Fair. Review the topics and practice more.';
+            } else {
+                message = 'Keep studying! Pharmacognosy requires consistent practice.';
+            }
+
+            document.getElementById('questionCard').style.display = 'none';
+            document.getElementById('resultsSection').classList.add('show');
+            document.getElementById('finalScore').textContent = `${totalScore} / ${quizData.length}`;
+            document.getElementById('scoreMessage').textContent = `${percentage.toFixed(1)}% - ${message}`;
+            document.getElementById('nextBtn').textContent = 'Restart Quiz';
+            document.getElementById('nextBtn').onclick = () => location.reload();
+        }
+
+        // Initialize
+        loadQuestion();
+    </script>
+</body>
+</html>
